@@ -1,6 +1,8 @@
 var Ffmpeg = require('../index'),
+  Metalib = Ffmpeg.Metadata,
   path = require('path'),
   fs = require('fs'),
+  assert = require('assert'),
   exec = require('child_process').exec,
   testhelper = require('./helpers');
 
@@ -389,6 +391,75 @@ describe('Command', function() {
           args.indexOf(5).should.above(-1);
           done();
         });
+    });
+  });
+
+  describe('autoOrient', function() {
+    it('should not rotate the video if it does not need rotating', function(done) {
+      var inputFile = path.join(__dirname, 'assets', 'norotation.mov');
+      var testFile = path.join(__dirname, 'assets', 'testnorotation.mov');
+      var metaObject = new Metalib(inputFile, function(metadata, err) {
+        assert.ok(!err);
+        assert.equal(metadata.video.rotate, 0);
+        new Ffmpeg({ source: inputFile, nolog: true})
+        .autoOrient(function(proc) {
+          proc.getArgs(function(args) {
+            assert.equal(args.indexOf('-vf'), -1);
+            done();
+          });
+        });
+      });
+    });
+    it('should rotate a video that has a rotation - 90 degrees', function(done) {
+      var inputFile = path.join(__dirname, 'assets', 'rotation90.mov');
+      var testFile = path.join(__dirname, 'assets', 'testrotation90.mov');
+      var metaObject = new Metalib(inputFile, function(metadata, err) {
+        assert.ok(!err);
+        assert.equal(metadata.video.rotate, 90);
+        new Ffmpeg({ source: inputFile, nolog: true})
+        .autoOrient(function(proc) {
+          proc.getArgs(function(args) {
+            var index = args.indexOf('-vf');
+            assert.ok(index >= 0);
+            assert.equal(args[index+1], 'transpose=1');
+            done();
+          });
+        });
+      });
+    });
+    it('should rotate a video that has a rotation - 180 degrees', function(done) {
+      var inputFile = path.join(__dirname, 'assets', 'rotation180.mov');
+      var testFile = path.join(__dirname, 'assets', 'testrotation180.mov');
+      var metaObject = new Metalib(inputFile, function(metadata, err) {
+        assert.ok(!err);
+        assert.equal(metadata.video.rotate, 180);
+        new Ffmpeg({ source: inputFile, nolog: true})
+        .autoOrient(function(proc) {
+          proc.getArgs(function(args) {
+            var index = args.indexOf('-vf');
+            assert.ok(index >= 0);
+            assert.equal(args[index+1], 'hflip,vflip');
+            done();
+          });
+        });
+      });
+    });
+    it('should rotate a video that has a rotation - 270 degrees', function(done) {
+      var inputFile = path.join(__dirname, 'assets', 'rotation270.mov');
+      var testFile = path.join(__dirname, 'assets', 'testrotation270.mov');
+      var metaObject = new Metalib(inputFile, function(metadata, err) {
+        assert.ok(!err);
+        assert.equal(metadata.video.rotate, 270);
+        new Ffmpeg({ source: inputFile, nolog: true})
+        .autoOrient(function(proc) {
+          proc.getArgs(function(args) {
+            var index = args.indexOf('-vf');
+            assert.ok(index >= 0);
+            assert.equal(args[index+1], 'transpose=2');
+            done();
+          });
+        });
+      });
     });
   });
 
