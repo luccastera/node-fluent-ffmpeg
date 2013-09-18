@@ -2,7 +2,7 @@ var fs = require('fs'),
   ffmpeg = require('../index');
 
 // open input stream
-var infs = fs.createReadStream(__dirname + '/test/assets/testvideo-43.avi');
+var infs = fs.createReadStream(__dirname + '/test/assets/video-43.avi');
 
 infs.on('error', function(err) {
   console.log(err);

@@ -9,9 +9,9 @@ var Ffmpeg = require('../index'),
 describe('Processor', function() {
   before(function(done) {
     // check for ffmpeg installation
-    this.testfile = path.join(__dirname, 'assets', 'testvideo-43.avi');
-    this.testfilewide = path.join(__dirname, 'assets', 'testvideo-169.avi');
-    this.testfilebig = path.join(__dirname, 'assets', 'testvideo-5m.mpg');
+    this.testfile = path.join(__dirname, 'assets', 'video-43.avi');
+    this.testfilewide = path.join(__dirname, 'assets', 'video-169.avi');
+    this.testfilebig = path.join(__dirname, 'assets', 'video-5m.mpg');
 
     var self = this;
     exec(testhelper.getFfmpegCheck(), function(err, stdout, stderr) {
@@ -134,7 +134,7 @@ describe('Processor', function() {
   });
 
   it('should save the output file properly to disk using a stream', function(done) {
-    var testFile = path.join(__dirname, 'assets', 'te[s]t video \' " .flv');
+    var testFile = path.join(__dirname, 'assets', 'testvideo.flv');
 
     new Ffmpeg({ source: this.testfile, nolog: false })
       .usingPreset('flashvideo')
