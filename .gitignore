@@ -4,3 +4,4 @@ lib-cov
 *.swp
 .idea
 .DS_Store
+test/assets/test*
