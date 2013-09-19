@@ -3,7 +3,7 @@ var Registry = process.env.FLUENTFFMPEG_COV ? require('../lib-cov/registry') : r
 describe('Registry', function() {
   before(function() {
     Registry.instance.reset();
-  })
+  });
   describe('set', function() {
     it('should set a value in the global registry', function() {
       Registry.instance.set('foo', 'bar');

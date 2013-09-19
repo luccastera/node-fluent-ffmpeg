@@ -1,7 +1,7 @@
 var Ffmpeg = require('../index'),
   path = require('path'),
   fs = require('fs'),
-  exec = require('child_process').exec
+  exec = require('child_process').exec,
   testhelper = require('./helpers');
 
 describe('Debug', function() {

@@ -1,6 +1,6 @@
 var Ffmpeg = require('../index'),
-  path = require('path'),
-  assert = require('assert');
+    path = require('path'),
+    assert = require('assert');
 
 // kinda nasty...
 var ext = new Ffmpeg(path.join(__dirname, 'assets', 'video-43.avi'));
@@ -15,7 +15,7 @@ describe('Extensions', function() {
       assert.ok(!ext.toAspectRatio('15.929'));
     });
   });
-  
+
   describe('parseVersionString', function() {
     it('should parse the major/minor/patch version correctly', function() {
       var ret = ext.parseVersionString('4.5.123');
@@ -24,7 +24,7 @@ describe('Extensions', function() {
       ret.should.have.property('patch').with.valueOf(123);
     });
   });
-  
+
   describe('atLeastVersion', function() {
     it('should correctly compare a full version number', function() {
       ext.atLeastVersion('2.3.4532', '2.3.4531').should.be.true;
@@ -39,7 +39,7 @@ describe('Extensions', function() {
       ext.atLeastVersion('1.2.34', '1.2.34').should.be.true;
     });
   });
-  
+
   describe('ffmpegTimemarkToSeconds', function() {
     it('should correctly convert a simple timestamp', function() {
       ext.ffmpegTimemarkToSeconds('00:02:00.00').should.be.equal(120);

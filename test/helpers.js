@@ -10,4 +10,4 @@ exports = module.exports = TestHelpers = {
       return 'where /Q ffmpeg';
     }
   }
-}
+};

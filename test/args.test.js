@@ -107,7 +107,7 @@ describe('Command', function() {
         .withVideoBitrate('256k', Ffmpeg.CONSTANT_BITRATE)
         .getArgs(function(args) {
           args.indexOf('-b').should.above(-1);
-          args.indexOf('-maxrate').should.above(-1);;
+          args.indexOf('-maxrate').should.above(-1);
           args.indexOf('-minrate').should.above(-1);
           args.indexOf('-bufsize').should.above(-1);
           done();
@@ -299,7 +299,7 @@ describe('Command', function() {
             done();
           }
           else{
-            done(new Error("args should contain loop or loop_output"))
+            done(new Error("args should contain loop or loop_output"));
           }
         });
     });
@@ -313,7 +313,7 @@ describe('Command', function() {
             done();
           }
           else{
-            done(new Error("args should contain loop or loop_output"))
+            done(new Error("args should contain loop or loop_output"));
           }
 
         });
@@ -328,7 +328,7 @@ describe('Command', function() {
             done();
           }
           else{
-            done(new Error("args should contain loop or loop_output"))
+            done(new Error("args should contain loop or loop_output"));
           }
         });
     });

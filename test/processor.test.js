@@ -57,10 +57,10 @@ describe('Processor', function() {
   });
 
   it('should report progress through event onProgress', function(done) {
-    this.timeout(15000)
+    this.timeout(15000);
 
-    var testFile = path.join(__dirname, 'assets', 'testOnProgress.flv')
-      , gotProgress = false;
+    var testFile = path.join(__dirname, 'assets', 'testOnProgress.flv'), 
+        gotProgress = false;
 
     new Ffmpeg({ source: this.testfilebig, nolog: true })
         .onProgress(function(data) {
@@ -159,7 +159,7 @@ describe('Processor', function() {
             if (exist) {
               setTimeout(function() {
                 fs.unlink(testFile,function(){
-                  done()
+                  done();
                 });
               }, 10);
             }
@@ -272,7 +272,7 @@ describe('Processor', function() {
         else{
           done(new Error('Didn\'t throw an error'));
         }
-      })
-    })
+      });
+    });
   });
 });
